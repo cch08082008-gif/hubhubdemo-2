@@ -1159,7 +1159,250 @@
     padding: 0;
   }
 
-  /* ─── TOAST ─── */
+  /* Quick colour dots on cards */
+  .product-quick-colors {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .product-card:hover .product-quick-colors { opacity: 1; }
+  .quick-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  /* ─── PRODUCT DETAIL ─── */
+  .pd-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding: 40px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .pd-gallery { display: flex; flex-direction: column; gap: 12px; }
+
+  .pd-main-img {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .pd-thumbs {
+    display: flex;
+    gap: 10px;
+  }
+
+  .pd-thumb {
+    width: 72px;
+    height: 88px;
+    cursor: pointer;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .pd-thumb.active { border-color: var(--black); }
+  .pd-thumb:hover { border-color: var(--grey); }
+
+  /* Info panel */
+  .pd-info { display: flex; flex-direction: column; gap: 0; padding-top: 8px; }
+
+  .pd-cat-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 10px;
+  }
+
+  .pd-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    margin-bottom: 16px;
+  }
+
+  .pd-price-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .pd-price {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--black);
+  }
+
+  .pd-old-price {
+    font-size: 17px;
+    color: var(--grey);
+    text-decoration: line-through;
+  }
+
+  .pd-save-tag {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  .pd-divider {
+    height: 1px;
+    background: var(--light-grey);
+    margin: 22px 0;
+  }
+
+  .pd-section { margin-bottom: 22px; }
+
+  .pd-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .pd-selected-label {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--grey);
+  }
+
+  /* Colour swatches */
+  .pd-color-swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .pd-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: outline-color 0.15s, transform 0.15s;
+  }
+
+  .pd-swatch:hover { transform: scale(1.12); }
+  .pd-swatch.active { outline-color: var(--black); }
+
+  /* Size buttons */
+  .pd-sizes { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .pd-size-btn {
+    min-width: 52px;
+    height: 44px;
+    border: 1.5px solid var(--light-grey);
+    background: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    padding: 0 14px;
+    color: var(--black);
+  }
+
+  .pd-size-btn:hover { border-color: var(--black); }
+
+  .pd-size-btn.active {
+    background: var(--black);
+    border-color: var(--black);
+    color: white;
+    font-weight: 600;
+  }
+
+  /* shake animation for size prompt */
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%,60%  { transform: translateX(-6px); }
+    40%,80%  { transform: translateX(6px); }
+  }
+  .shake { animation: shake 0.4s ease; }
+
+  /* Description */
+  .pd-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #666;
+    font-weight: 300;
+  }
+
+  /* CTA row */
+  .pd-cta-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .pd-add-btn {
+    flex: 1;
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.3s;
+  }
+
+  .pd-wishlist-btn {
+    width: 52px;
+    height: 52px;
+    border: 1.5px solid var(--light-grey);
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .pd-wishlist-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Perks */
+  .pd-perks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pd-perk {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--grey);
+  }
+
+  .pd-perk svg { flex-shrink: 0; }
+
+  @media (max-width: 768px) {
+    .pd-layout {
+      grid-template-columns: 1fr;
+      padding: 20px;
+      gap: 28px;
+    }
+  }
   .toast {
     position: fixed;
     bottom: 90px; right: 28px;
@@ -1637,6 +1880,9 @@
   </footer>
 </div>
 
+<!-- ═══════════════ PRODUCT DETAIL PAGE ═══════════════ -->
+<div id="page-product" class="page"></div>
+
 <!-- WhatsApp Float -->
 <div class="wa-float" title="Chat with us on WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
@@ -1651,18 +1897,18 @@
 <script>
 // ─── DATA ───
 const products = [
-  { id:1, name:'CloudFlex Sports Bra', cat:'Women', type:'Sports Bra', price:139, oldPrice:null, badge:'New', color:'#c8bfb2' },
-  { id:2, name:'ZenFlow Leggings', cat:'Women', type:'Bottoms', price:169, oldPrice:229, badge:'Sale', color:'#b0a89a' },
-  { id:3, name:'PowerGrid Tee', cat:'Men', type:'Tops', price:99, oldPrice:null, badge:'New', color:'#9a9590' },
-  { id:4, name:'DualTone Set (Bra+Legging)', cat:'Women', type:'Sets', price:269, oldPrice:339, badge:'Sale', color:'#c4bbb0' },
-  { id:5, name:'CoreDrive Shorts', cat:'Men', type:'Bottoms', price:119, oldPrice:null, badge:null, color:'#8f8880' },
-  { id:6, name:'StrongBack Racerback', cat:'Women', type:'Tops', price:109, oldPrice:null, badge:'New', color:'#b8b0a5' },
-  { id:7, name:'ActivePro Jogger', cat:'Men', type:'Bottoms', price:189, oldPrice:239, badge:'Sale', color:'#888078' },
-  { id:8, name:'Unison Zip Hoodie', cat:'Unisex', type:'Tops', price:229, oldPrice:null, badge:null, color:'#a09890' },
-  { id:9, name:'FlowState Set (M)', cat:'Men', type:'Sets', price:279, oldPrice:349, badge:'Sale', color:'#908880' },
-  { id:10, name:'LiftEase Sports Bra', cat:'Women', type:'Sports Bra', price:129, oldPrice:null, badge:null, color:'#c0b8ae' },
-  { id:11, name:'StretchMax Tights', cat:'Women', type:'Bottoms', price:159, oldPrice:null, badge:'New', color:'#b8b0a4' },
-  { id:12, name:'BreezeTech Tank', cat:'Unisex', type:'Tops', price:89, oldPrice:129, badge:'Sale', color:'#a8a098' },
+  { id:1,  name:'CloudFlex Sports Bra',       cat:'Women',  type:'Sports Bra', price:139, oldPrice:null, badge:'New',  color:'#c8bfb2', colors:[{name:'Warm Sand',hex:'#c8bfb2'},{name:'Slate Grey',hex:'#8a8a8a'},{name:'Midnight',hex:'#2a2a2a'}],                    sizes:['XS','S','M','L','XL'], desc:'Seamless medium-support sports bra with moisture-wicking fabric. Ideal for yoga, pilates, and light training.' },
+  { id:2,  name:'ZenFlow Leggings',            cat:'Women',  type:'Bottoms',    price:169, oldPrice:229,  badge:'Sale', color:'#b0a89a', colors:[{name:'Pebble',hex:'#b0a89a'},{name:'Black',hex:'#1a1a1a'},{name:'Forest',hex:'#3a5a3a'}],                             sizes:['XS','S','M','L','XL'], desc:'High-waisted 7/8 length leggings with 4-way stretch. Squat-proof, with hidden side pocket.' },
+  { id:3,  name:'PowerGrid Tee',               cat:'Men',    type:'Tops',       price:99,  oldPrice:null, badge:'New',  color:'#9a9590', colors:[{name:'Storm',hex:'#9a9590'},{name:'White',hex:'#f5f5f5'},{name:'Navy',hex:'#1e3a5f'},{name:'Black',hex:'#1a1a1a'}],    sizes:['S','M','L','XL','XXL'], desc:'Lightweight performance tee with ventilated mesh panels. Quick-dry technology keeps you cool during intense sessions.' },
+  { id:4,  name:'DualTone Set',                cat:'Women',  type:'Sets',       price:269, oldPrice:339,  badge:'Sale', color:'#c4bbb0', colors:[{name:'Blush',hex:'#c4bbb0'},{name:'Ebony',hex:'#222222'}],                                                             sizes:['XS','S','M','L'],      desc:'Matching sports bra and high-waist legging set. Mix-and-match colorblocking for a put-together look at the gym.' },
+  { id:5,  name:'CoreDrive Shorts',            cat:'Men',    type:'Bottoms',    price:119, oldPrice:null, badge:null,   color:'#8f8880', colors:[{name:'Ash',hex:'#8f8880'},{name:'Black',hex:'#1a1a1a'},{name:'Navy',hex:'#1e3a5f'}],                                   sizes:['S','M','L','XL','XXL'], desc:'5" inseam training shorts with built-in liner. Side zip pockets and reflective details for low-light runs.' },
+  { id:6,  name:'StrongBack Racerback',        cat:'Women',  type:'Tops',       price:109, oldPrice:null, badge:'New',  color:'#b8b0a5', colors:[{name:'Ivory',hex:'#b8b0a5'},{name:'Dusty Rose',hex:'#c9a0a0'},{name:'Black',hex:'#1a1a1a'}],                          sizes:['XS','S','M','L','XL'], desc:'Open-back racerback tank with built-in shelf bra. Buttery-soft fabric with four-way stretch.' },
+  { id:7,  name:'ActivePro Jogger',            cat:'Men',    type:'Bottoms',    price:189, oldPrice:239,  badge:'Sale', color:'#888078', colors:[{name:'Charcoal',hex:'#888078'},{name:'Black',hex:'#1a1a1a'}],                                                          sizes:['S','M','L','XL','XXL'], desc:'Tapered jogger with adjustable waistband and zip ankle cuffs. French terry fabric for warmth without bulk.' },
+  { id:8,  name:'Unison Zip Hoodie',           cat:'Unisex', type:'Tops',       price:229, oldPrice:null, badge:null,   color:'#a09890', colors:[{name:'Driftwood',hex:'#a09890'},{name:'Black',hex:'#1a1a1a'},{name:'Sage',hex:'#7a9a7a'}],                             sizes:['XS','S','M','L','XL','XXL'], desc:'Half-zip fleece hoodie with kangaroo pocket. Relaxed fit, perfect for pre- and post-workout.' },
+  { id:9,  name:'FlowState Set (Men)',         cat:'Men',    type:'Sets',       price:279, oldPrice:349,  badge:'Sale', color:'#908880', colors:[{name:'Graphite',hex:'#908880'},{name:'Navy',hex:'#1e3a5f'}],                                                           sizes:['S','M','L','XL'],      desc:'Coordinated tee and shorts set engineered for high-mobility training. Moisture-wicking with odour control.' },
+  { id:10, name:'LiftEase Sports Bra',         cat:'Women',  type:'Sports Bra', price:129, oldPrice:null, badge:null,   color:'#c0b8ae', colors:[{name:'Linen',hex:'#c0b8ae'},{name:'Slate',hex:'#7a8a94'},{name:'Black',hex:'#1a1a1a'}],                                sizes:['XS','S','M','L','XL'], desc:'High-impact sports bra with encapsulated cups and adjustable straps. Designed for running and HIIT.' },
+  { id:11, name:'StretchMax Tights',           cat:'Women',  type:'Bottoms',    price:159, oldPrice:null, badge:'New',  color:'#b8b0a4', colors:[{name:'Sand',hex:'#b8b0a4'},{name:'Black',hex:'#1a1a1a'},{name:'Plum',hex:'#6a3a5a'}],                                  sizes:['XS','S','M','L','XL'], desc:'Full-length compressive tights with wide waistband. Flatlock seams prevent chafing during long runs.' },
+  { id:12, name:'BreezeTech Tank',             cat:'Unisex', type:'Tops',       price:89,  oldPrice:129,  badge:'Sale', color:'#a8a098', colors:[{name:'Oat',hex:'#a8a098'},{name:'White',hex:'#f5f5f5'},{name:'Black',hex:'#1a1a1a'},{name:'Coral',hex:'#c87a6a'}],    sizes:['XS','S','M','L','XL','XXL'], desc:'Airy mesh tank with droptail hem. Ultra-breathable for hot weather or high-intensity workouts.' },
 ];
 
 let cart = [];
@@ -1678,6 +1924,183 @@ function goTo(page) {
   if(page === 'cart') renderCart();
   if(page === 'checkout') renderCheckout();
   if(page === 'success') renderSuccess();
+}
+
+// ─── PRODUCT DETAIL ───
+let pdSelectedColor = null;
+let pdSelectedSize  = null;
+let pdCurrentProduct = null;
+
+function openProduct(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  pdCurrentProduct = p;
+  pdSelectedColor  = p.colors[0];
+  pdSelectedSize   = null;
+
+  const page = document.getElementById('page-product');
+
+  page.innerHTML = `
+    <div class="breadcrumb">
+      <span onclick="goTo('home')">Home</span>
+      <span class="sep">›</span>
+      <span onclick="goTo('shop')">Shop</span>
+      <span class="sep">›</span>
+      <span>${p.name}</span>
+    </div>
+    <div class="pd-layout">
+
+      <!-- Image panel -->
+      <div class="pd-gallery">
+        <div class="pd-main-img" id="pd-main-img" style="background:${p.colors[0].hex};">
+          <div class="img-placeholder light" style="background:${p.colors[0].hex};color:rgba(0,0,0,0.12);font-size:11px;height:100%;">${p.name.toUpperCase()}</div>
+          ${p.badge ? `<div class="product-badge" style="top:20px;left:20px;font-size:11px;padding:5px 14px;">${p.badge}</div>` : ''}
+        </div>
+        <div class="pd-thumbs">
+          ${p.colors.map((c,i) => `
+            <div class="pd-thumb ${i===0?'active':''}" id="pd-thumb-${i}"
+                 style="background:${c.hex};"
+                 onclick="selectThumb(${i})">
+              <div class="img-placeholder light" style="background:${c.hex};color:rgba(0,0,0,0.1);font-size:8px;height:100%;">${c.name.toUpperCase()}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Info panel -->
+      <div class="pd-info">
+        <div class="pd-cat-tag">${p.cat} · ${p.type}</div>
+        <h1 class="pd-name">${p.name}</h1>
+        <div class="pd-price-row">
+          <span class="pd-price">RM${p.price}</span>
+          ${p.oldPrice ? `<span class="pd-old-price">RM${p.oldPrice}</span><span class="pd-save-tag">Save RM${p.oldPrice - p.price}</span>` : ''}
+        </div>
+
+        <div class="pd-divider"></div>
+
+        <!-- Colour -->
+        <div class="pd-section">
+          <div class="pd-label">Colour — <span class="pd-selected-label" id="pd-color-label">${p.colors[0].name}</span></div>
+          <div class="pd-color-swatches" id="pd-swatches">
+            ${p.colors.map((c,i) => `
+              <button class="pd-swatch ${i===0?'active':''}" id="pd-swatch-${i}"
+                      title="${c.name}"
+                      style="background:${c.hex};${c.hex==='#f5f5f5'?'border:2px solid #ccc;':''}"
+                      onclick="selectColor(${i})"></button>`).join('')}
+          </div>
+        </div>
+
+        <!-- Size -->
+        <div class="pd-section">
+          <div class="pd-label" style="display:flex;justify-content:space-between;align-items:center;">
+            <span>Size — <span class="pd-selected-label" id="pd-size-label">Select a size</span></span>
+            <span style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:500;">Size Guide</span>
+          </div>
+          <div class="pd-sizes" id="pd-sizes">
+            ${p.sizes.map(s => `
+              <button class="pd-size-btn" onclick="selectSize('${s}')">${s}</button>`).join('')}
+          </div>
+        </div>
+
+        <div class="pd-divider"></div>
+
+        <!-- Description -->
+        <p class="pd-desc">${p.desc}</p>
+
+        <div class="pd-divider"></div>
+
+        <!-- CTA -->
+        <div class="pd-cta-row">
+          <button class="btn-primary pd-add-btn" id="pd-add-btn" onclick="pdAddToCart()">
+            Add to Cart
+          </button>
+          <button class="pd-wishlist-btn" title="Wishlist">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+
+        <div class="pd-perks">
+          <div class="pd-perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Free shipping above RM150</div>
+          <div class="pd-perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> 30-day easy returns</div>
+          <div class="pd-perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Secure checkout</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- You May Also Like -->
+    <div class="section" style="padding:40px;">
+      <div class="section-header">
+        <h2 class="section-title">You May Also Like</h2>
+      </div>
+      <div class="products-row">
+        ${products.filter(x => x.id !== p.id && x.cat === p.cat).slice(0,4).map(x => productCardHTML(x)).join('')}
+      </div>
+    </div>
+
+    <footer style="background:var(--black);color:var(--white);padding:28px 40px;">
+      <div class="footer-bottom" style="border:none;padding:0;">
+        <span onclick="goTo('home')" style="cursor:pointer;font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;letter-spacing:0.02em;">hubhub</span>
+        <span>© 2026 hubhub. Made in Malaysia 🇲🇾</span>
+      </div>
+    </footer>
+  `;
+
+  document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
+  page.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function selectThumb(i) {
+  const p = pdCurrentProduct;
+  pdSelectedColor = p.colors[i];
+  // update main image
+  const mainImg = document.getElementById('pd-main-img');
+  mainImg.style.background = pdSelectedColor.hex;
+  mainImg.querySelector('.img-placeholder').style.background = pdSelectedColor.hex;
+  // update thumb active state
+  document.querySelectorAll('.pd-thumb').forEach((el,idx) => el.classList.toggle('active', idx===i));
+  // sync swatch
+  document.querySelectorAll('.pd-swatch').forEach((el,idx) => el.classList.toggle('active', idx===i));
+  document.getElementById('pd-color-label').textContent = pdSelectedColor.name;
+}
+
+function selectColor(i) {
+  const p = pdCurrentProduct;
+  pdSelectedColor = p.colors[i];
+  // update swatches
+  document.querySelectorAll('.pd-swatch').forEach((el,idx) => el.classList.toggle('active', idx===i));
+  document.getElementById('pd-color-label').textContent = pdSelectedColor.name;
+  // sync thumb + main image
+  selectThumb(i);
+}
+
+function selectSize(s) {
+  pdSelectedSize = s;
+  document.querySelectorAll('.pd-size-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === s);
+  });
+  document.getElementById('pd-size-label').textContent = s;
+}
+
+function pdAddToCart() {
+  if (!pdSelectedSize) {
+    // shake the size row
+    const el = document.getElementById('pd-sizes');
+    el.classList.add('shake');
+    setTimeout(() => el.classList.remove('shake'), 500);
+    showToast('Please select a size first');
+    return;
+  }
+  const p = pdCurrentProduct;
+  const existing = cart.find(x => x.id === p.id && x.size === pdSelectedSize);
+  if (existing) existing.qty++;
+  else cart.push({...p, qty:1, size: pdSelectedSize, selectedColor: pdSelectedColor.name});
+  updateCartBadge();
+  showToast(`${p.name} (${pdSelectedSize}) added to cart`);
+  // brief button feedback
+  const btn = document.getElementById('pd-add-btn');
+  btn.textContent = '✓ Added!';
+  btn.style.background = '#2a6a3a';
+  setTimeout(() => { btn.textContent = 'Add to Cart'; btn.style.background = ''; }, 1500);
 }
 
 function filterAndGo(filter) {
@@ -1698,13 +2121,15 @@ function filterAndGo(filter) {
 }
 
 // ─── PRODUCT CARD ───
-function productCardHTML(p, size='normal') {
-  const h = size==='normal' ? '' : '';
+function productCardHTML(p) {
   return `
-    <div class="product-card" onclick="addToCart(${p.id})">
+    <div class="product-card" onclick="openProduct(${p.id})">
       <div class="product-img" style="background:${p.color};">
         <div class="img-placeholder light" style="background:${p.color};color:rgba(0,0,0,0.15);font-size:10px;">${p.name.toUpperCase()}</div>
         ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+        <div class="product-quick-colors">
+          ${p.colors.slice(0,4).map(c=>`<span class="quick-dot" style="background:${c.hex};border:2px solid ${c.hex==='#f5f5f5'?'#ccc':'transparent'};"></span>`).join('')}
+        </div>
       </div>
       <div class="product-info">
         <div class="product-name">${p.name}</div>
