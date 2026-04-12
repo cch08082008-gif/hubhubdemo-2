@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hubhub — Premium Sportswear</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0e0e0e;
+    --white: #faf9f7;
+    --cream: #f2ede6;
+    --accent: #b85c2c;
+    --accent-light: #d4743f;
+    --grey: #8a8580;
+    --light-grey: #e8e3dc;
+    --card-bg: #f7f4ef;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* ─── ANNOUNCEMENT BAR ─── */
+  .announcement {
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 9px 20px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--light-grey);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--black);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links li a {
+    text-decoration: none;
+    color: var(--black);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--accent);
+    transition: width 0.25s;
+  }
+
+  .nav-links li a:hover { color: var(--accent); }
+  .nav-links li a:hover::after { width: 100%; }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    color: var(--black);
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-icon:hover { color: var(--accent); }
+
+  .cart-badge {
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--accent);
+    color: white;
+    font-size: 9px;
+    font-weight: 600;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+  }
+
+  /* ─── PAGES ─── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ─── HOME ─── */
+
+  /* Hero */
+  .hero {
+    background: var(--black);
+    min-height: 72vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-content {
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .hero-promo-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-bottom: 28px;
+    width: fit-content;
+  }
+
+  .hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(48px, 6.5vw, 88px);
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title span { color: var(--accent); }
+
+  .hero-sub {
+    color: #9a9590;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 320px;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid #444;
+    padding: 13px 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-image-side {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-img-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100%;
+    gap: 3px;
+  }
+
+  .hero-img-tile {
+    background: #1a1a1a;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-img-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+  }
+
+  .hero-img-tile .tile-label {
+    position: absolute;
+    bottom: 12px; left: 12px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+  }
+
+  /* Category Grid */
+  .section {
+    padding: 72px 40px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--black);
+  }
+
+  .see-all {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .see-all:hover { opacity: 0.7; }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 260px 260px;
+    gap: 12px;
+  }
+
+  .cat-tile {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--card-bg);
+  }
+
+  .cat-tile:first-child {
+    grid-row: 1 / 3;
+  }
+
+  .cat-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .cat-tile:hover img { transform: scale(1.04); }
+
+  .cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+  }
+
+  .cat-name {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .cat-sub {
+    color: rgba(255,255,255,0.65);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* New Arrivals Strip */
+  .products-strip {
+    background: var(--cream);
+  }
+
+  .products-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .product-card {
+    background: var(--white);
+    cursor: pointer;
+    transition: transform 0.25s;
+    position: relative;
+  }
+
+  .product-card:hover { transform: translateY(-3px); }
+
+  .product-img {
+    aspect-ratio: 3/4;
+    background: var(--card-bg);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .product-card:hover .product-img img { transform: scale(1.05); }
+
+  .product-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--accent);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+
+  .product-info {
+    padding: 14px 16px 18px;
+  }
+
+  .product-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+
+  .product-cat {
+    font-size: 12px;
+    color: var(--grey);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .product-price-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .product-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--black);
+  }
+
+  .product-price-old {
+    font-size: 13px;
+    color: var(--grey);
+    text-decoration: line-through;
+  }
+
+  /* ─── ALL PRODUCTS PAGE ─── */
+
+  .shop-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 80vh;
+    padding: 40px;
+    gap: 40px;
+  }
+
+  .filters-sidebar {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+  }
+
+  .filter-group {
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--light-grey);
+    padding-bottom: 24px;
+  }
+
+  .filter-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 14px;
+  }
+
+  .filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--black);
+    transition: color 0.15s;
+  }
+
+  .filter-option:hover { color: var(--accent); }
+
+  .filter-option input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 14px;
+    height: 14px;
+  }
+
+  .shop-main {}
+
+  .shop-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--light-grey);
+  }
+
+  .shop-count {
+    font-size: 13px;
+    color: var(--grey);
+  }
+
+  .sort-select {
+    border: 1px solid var(--light-grey);
+    background: var(--white);
+    padding: 8px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--black);
+    cursor: pointer;
+    outline: none;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  /* ─── CART PAGE ─── */
+
+  .cart-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 40px;
+    padding: 48px 40px;
+    min-height: 80vh;
+    align-items: start;
+  }
+
+  .page-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+  }
+
+  .cart-items {}
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--light-grey);
+    align-items: center;
+  }
+
+  .cart-item-img {
+    aspect-ratio: 3/4;
+    background: var(--card-bg);
+    overflow: hidden;
+  }
+
+  .cart-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cart-item-details {}
+
+  .cart-item-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .cart-item-variant {
+    font-size: 12px;
+    color: var(--grey);
+    margin-bottom: 14px;
+  }
+
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--light-grey);
+    width: fit-content;
+  }
+
+  .qty-btn {
+    background: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+
+  .qty-btn:hover { background: var(--cream); }
+
+  .qty-num {
+    width: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    border-left: 1px solid var(--light-grey);
+    border-right: 1px solid var(--light-grey);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart-item-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .cart-item-price {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .remove-btn {
+    background: none;
+    border: none;
+    color: var(--grey);
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .remove-btn:hover { color: var(--accent); }
+
+  /* Order Summary */
+  .order-summary {
+    background: var(--cream);
+    padding: 32px;
+    position: sticky;
+    top: 80px;
+  }
+
+  .summary-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0em;
+    margin-bottom: 24px;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+
+  .summary-row.total {
+    font-weight: 700;
+    font-size: 16px;
+    padding-top: 16px;
+    margin-top: 8px;
+    border-top: 1.5px solid var(--light-grey);
+  }
+
+  .summary-row .label { color: var(--grey); }
+  .summary-row.total .label { color: var(--black); }
+
+  .promo-row {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0;
+  }
+
+  .promo-input {
+    flex: 1;
+    border: 1px solid var(--light-grey);
+    background: var(--white);
+    padding: 10px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    outline: none;
+  }
+
+  .promo-input:focus { border-color: var(--accent); }
+
+  .btn-sm {
+    background: var(--black);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-sm:hover { background: var(--accent); }
+
+  /* ─── CHECKOUT PAGE ─── */
+
+  .checkout-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 60px;
+    padding: 48px 40px;
+    align-items: start;
+  }
+
+  .checkout-steps {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+
+  .step {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--grey);
+    text-transform: uppercase;
+  }
+
+  .step.active { color: var(--accent); }
+  .step-sep { color: var(--light-grey); font-size: 14px; }
+
+  .form-section {
+    margin-bottom: 36px;
+  }
+
+  .form-section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0em;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--light-grey);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .form-row.full { grid-template-columns: 1fr; }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .form-input {
+    border: 1px solid var(--light-grey);
+    background: var(--white);
+    padding: 12px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: var(--accent); }
+
+  .payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pay-option {
+    border: 1.5px solid var(--light-grey);
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: border-color 0.2s;
+  }
+
+  .pay-option.selected {
+    border-color: var(--accent);
+    background: rgba(184, 92, 44, 0.04);
+  }
+
+  .pay-option input[type="radio"] {
+    accent-color: var(--accent);
+  }
+
+  .pay-label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .pay-icons {
+    margin-left: auto;
+    display: flex;
+    gap: 6px;
+  }
+
+  .pay-icon-pill {
+    background: var(--cream);
+    border: 1px solid var(--light-grey);
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--grey);
+    letter-spacing: 0.04em;
+  }
+
+  /* Order summary sidebar on checkout */
+  .checkout-summary {
+    position: sticky;
+    top: 80px;
+    background: var(--cream);
+    padding: 28px;
+  }
+
+  .checkout-item-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+
+  .checkout-item-img {
+    width: 60px;
+    aspect-ratio: 3/4;
+    background: var(--card-bg);
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .checkout-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .checkout-item-badge {
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--grey);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .checkout-item-info { flex: 1; }
+  .checkout-item-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .checkout-item-var { font-size: 11px; color: var(--grey); }
+  .checkout-item-price { font-size: 13px; font-weight: 700; }
+
+  /* ─── SUCCESS PAGE ─── */
+
+  .success-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 40px;
+    text-align: center;
+    min-height: 80vh;
+  }
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  .success-icon svg { width: 36px; height: 36px; }
+
+  .success-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .success-sub {
+    font-size: 16px;
+    color: var(--grey);
+    max-width: 400px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+
+  .success-order {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 40px;
+  }
+
+  .success-details {
+    background: var(--cream);
+    padding: 28px 40px;
+    max-width: 480px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 40px;
+  }
+
+  .success-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--light-grey);
+    font-size: 14px;
+  }
+
+  .success-detail-row:last-child { border-bottom: none; }
+  .success-detail-row .lbl { color: var(--grey); }
+  .success-detail-row .val { font-weight: 600; }
+
+  .success-actions {
+    display: flex;
+    gap: 14px;
+  }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    background: var(--black);
+    color: var(--white);
+    padding: 48px 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .page-header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .page-header p {
+    font-size: 14px;
+    color: #888;
+  }
+
+  /* ─── WHATSAPP FLOAT ─── */
+  .wa-float {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    width: 52px; height: 52px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    z-index: 999;
+    transition: transform 0.2s;
+  }
+
+  .wa-float:hover { transform: scale(1.08); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 60px 40px 32px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand .logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin-bottom: 14px;
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .footer-social { display: flex; gap: 12px; }
+
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    color: #777;
+    transition: all 0.2s;
+  }
+
+  .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .footer-col h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 18px;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li {
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul li:hover { color: var(--accent); }
+
+  .footer-bottom {
+    border-top: 1px solid #1e1e1e;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #555;
+  }
+
+  /* ─── EMPTY CART ─── */
+  .empty-state {
+    text-align: center;
+    padding: 80px 40px;
+  }
+
+  .empty-state h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .empty-state p {
+    color: var(--grey);
+    margin-bottom: 28px;
+    font-size: 15px;
+  }
+
+  /* Image placeholders */
+  .img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+    background: #1c1c1c;
+  }
+
+  .img-placeholder.light {
+    color: rgba(0,0,0,0.2);
+    background: #e8e3dc;
+  }
+
+  .img-placeholder.medium {
+    color: rgba(0,0,0,0.2);
+    background: #d4cfc8;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    padding: 14px 40px;
+    font-size: 12px;
+    color: var(--grey);
+    border-bottom: 1px solid var(--light-grey);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .breadcrumb span { cursor: pointer; }
+  .breadcrumb span:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--light-grey); }
+
+  /* Selected filters */
+  .active-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .filter-tag {
+    background: var(--black);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 12px;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .filter-tag button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+    padding: 0;
+  }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 90px; right: 28px;
+    background: var(--black);
+    color: white;
+    padding: 14px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    z-index: 9999;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .toast-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- Announcement Bar -->
+<div class="announcement">🇲🇾 FREE SHIPPING above RM150 &nbsp;|&nbsp; Use code <strong>HUBHUB10</strong> for 10% off your first order</div>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-logo" onclick="goTo('home')">hubhub</div>
+  <ul class="nav-links">
+    <li><a onclick="goTo('shop')">Shop All</a></li>
+    <li><a onclick="filterAndGo('Women')">Women</a></li>
+    <li><a onclick="filterAndGo('Men')">Men</a></li>
+    <li><a onclick="filterAndGo('Sets')">Sets</a></li>
+    <li><a onclick="filterAndGo('Sale')">Sale</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon" title="Search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="nav-icon" title="Account">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </button>
+    <button class="nav-icon" title="Cart" onclick="goTo('cart')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════ HOME PAGE ═══════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-promo-tag">🔥 Mid-Year Sale — Up to 40% Off</div>
+      <h1 class="hero-title">Move<br>Without<br><span>Limits</span></h1>
+      <p class="hero-sub">Premium sportswear engineered for performance. Designed for those who refuse to stop.</p>
+      <div class="hero-cta-row">
+        <button class="btn-primary" onclick="goTo('shop')">Shop the Sale</button>
+        <button class="btn-ghost" onclick="filterAndGo('Women')">Women's Collection</button>
+      </div>
+    </div>
+    <div class="hero-image-side">
+      <div class="hero-img-grid">
+        <div class="hero-img-tile">
+          <div class="img-placeholder" style="background:#1a1a1a;color:rgba(255,255,255,0.15);font-size:11px;">SPORTS BRA</div>
+          <div class="tile-label">Sports Bra</div>
+        </div>
+        <div class="hero-img-tile">
+          <div class="img-placeholder" style="background:#222;color:rgba(255,255,255,0.15);font-size:11px;">LEGGINGS</div>
+          <div class="tile-label">Leggings</div>
+        </div>
+        <div class="hero-img-tile">
+          <div class="img-placeholder" style="background:#191919;color:rgba(255,255,255,0.15);font-size:11px;">MEN'S TEE</div>
+          <div class="tile-label">Men's Tee</div>
+        </div>
+        <div class="hero-img-tile">
+          <div class="img-placeholder" style="background:#1e1e1e;color:rgba(255,255,255,0.15);font-size:11px;">SHORTS</div>
+          <div class="tile-label">Shorts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop by Category -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Shop by Category</h2>
+      <a class="see-all" onclick="goTo('shop')">View All →</a>
+    </div>
+    <div class="category-grid">
+      <div class="cat-tile" onclick="filterAndGo('Women')">
+        <div class="img-placeholder medium" style="height:100%;">WOMEN</div>
+        <div class="cat-overlay">
+          <div class="cat-name">Women</div>
+          <div class="cat-sub">32 products</div>
+        </div>
+      </div>
+      <div class="cat-tile" onclick="filterAndGo('Men')">
+        <div class="img-placeholder" style="height:100%;">MEN</div>
+        <div class="cat-overlay">
+          <div class="cat-name">Men</div>
+          <div class="cat-sub">24 products</div>
+        </div>
+      </div>
+      <div class="cat-tile" onclick="filterAndGo('Sets')">
+        <div class="img-placeholder" style="height:100%;background:#252525;">SETS</div>
+        <div class="cat-overlay">
+          <div class="cat-name">Sets</div>
+          <div class="cat-sub">12 products</div>
+        </div>
+      </div>
+      <div class="cat-tile" onclick="filterAndGo('Tops')">
+        <div class="img-placeholder" style="height:100%;background:#2a2a2a;">TOPS</div>
+        <div class="cat-overlay">
+          <div class="cat-name">Tops</div>
+          <div class="cat-sub">18 products</div>
+        </div>
+      </div>
+      <div class="cat-tile" onclick="filterAndGo('Bottoms')">
+        <div class="img-placeholder" style="height:100%;background:#1f1f1f;">BOTTOMS</div>
+        <div class="cat-overlay">
+          <div class="cat-name">Bottoms</div>
+          <div class="cat-sub">20 products</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Arrivals -->
+  <section class="section products-strip">
+    <div class="section-header">
+      <h2 class="section-title">New Arrivals</h2>
+      <a class="see-all" onclick="goTo('shop')">See All →</a>
+    </div>
+    <div class="products-row" id="home-products"></div>
+  </section>
+
+  <!-- Banner Strip -->
+  <div style="background:var(--accent);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <div style="font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;color:white;letter-spacing:-0.01em;">Mid-Year Sale — Up to 40% Off</div>
+      <div style="color:rgba(255,255,255,0.8);font-size:14px;margin-top:4px;">Limited time only. Shop before it's gone.</div>
+    </div>
+    <button class="btn-primary" style="background:white;color:var(--accent);" onclick="filterAndGo('Sale')">Shop Sale</button>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">hubhub</div>
+        <p>Premium Malaysian sportswear for those who move without limits. Quality built for performance, designed for life.</p>
+        <div class="footer-social">
+          <div class="social-btn">IG</div>
+          <div class="social-btn">TK</div>
+          <div class="social-btn">FB</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li onclick="filterAndGo('Women')">Women</li>
+          <li onclick="filterAndGo('Men')">Men</li>
+          <li onclick="filterAndGo('Sets')">Sets</li>
+          <li onclick="filterAndGo('Sale')">Sale</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li>Size Guide</li>
+          <li>Returns & Exchange</li>
+          <li>Track Order</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li>About hubhub</li>
+          <li>Sustainability</li>
+          <li>Careers</li>
+          <li>Terms & Privacy</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 hubhub. All rights reserved. Made in Malaysia 🇲🇾</span>
+      <span>Visa · Mastercard · FPX · DuitNow · GrabPay</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════ SHOP PAGE ═══════════════ -->
+<div id="page-shop" class="page">
+  <div class="page-header">
+    <div>
+      <h1>All Products</h1>
+      <p id="shop-subtitle">Showing all items</p>
+    </div>
+    <div style="display:flex;gap:16px;">
+      <div style="text-align:right">
+        <div style="font-size:11px;color:#555;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Free Shipping</div>
+        <div style="font-size:13px;color:#888;">Orders above RM150</div>
+      </div>
+    </div>
+  </div>
+  <div class="breadcrumb">
+    <span onclick="goTo('home')">Home</span>
+    <span class="sep">›</span>
+    <span>Shop</span>
+  </div>
+  <div class="shop-layout">
+    <aside class="filters-sidebar">
+      <div class="filter-group">
+        <div class="filter-title">Category</div>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="cat" value="Women"> Women</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="cat" value="Men"> Men</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="cat" value="Unisex"> Unisex</label>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">Type</div>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="type" value="Tops"> Tops</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="type" value="Bottoms"> Bottoms</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="type" value="Sports Bra"> Sports Bra</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="type" value="Sets"> Sets</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="type" value="Accessories"> Accessories</label>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">Price Range</div>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="price" value="under100"> Under RM100</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="price" value="100-200"> RM100 – RM200</label>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="price" value="over200"> Above RM200</label>
+      </div>
+      <div class="filter-group" style="border:none">
+        <div class="filter-title">Offers</div>
+        <label class="filter-option"><input type="checkbox" onchange="applyFilters()" data-filter="sale" value="sale"> On Sale</label>
+      </div>
+    </aside>
+    <div class="shop-main">
+      <div id="active-filters" class="active-filters"></div>
+      <div class="shop-top-bar">
+        <div class="shop-count" id="shop-count">12 products</div>
+        <select class="sort-select" onchange="applyFilters()">
+          <option>Sort: Featured</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>New Arrivals</option>
+        </select>
+      </div>
+      <div class="products-grid" id="shop-products"></div>
+    </div>
+  </div>
+  <footer style="background:var(--black);color:var(--white);padding:28px 40px;">
+    <div class="footer-bottom" style="border:none;padding:0;">
+      <span onclick="goTo('home')" style="cursor:pointer;font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;letter-spacing:0.02em;">hubhub</span>
+      <span>© 2026 hubhub. Made in Malaysia 🇲🇾</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════ CART PAGE ═══════════════ -->
+<div id="page-cart" class="page">
+  <div class="breadcrumb">
+    <span onclick="goTo('home')">Home</span>
+    <span class="sep">›</span>
+    <span onclick="goTo('shop')">Shop</span>
+    <span class="sep">›</span>
+    <span>Cart</span>
+  </div>
+  <div id="cart-content"></div>
+</div>
+
+<!-- ═══════════════ CHECKOUT PAGE ═══════════════ -->
+<div id="page-checkout" class="page">
+  <div class="breadcrumb">
+    <span onclick="goTo('home')">Home</span>
+    <span class="sep">›</span>
+    <span onclick="goTo('cart')">Cart</span>
+    <span class="sep">›</span>
+    <span>Checkout</span>
+  </div>
+  <div class="checkout-layout">
+    <div>
+      <div class="checkout-steps">
+        <span class="step active">Information</span>
+        <span class="step-sep">›</span>
+        <span class="step">Shipping</span>
+        <span class="step-sep">›</span>
+        <span class="step">Payment</span>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Contact Information</div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="you@email.com">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-input" placeholder="+60 12-345 6789">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Delivery Address</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Ahmad">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Razif">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label class="form-label">Address Line 1</label>
+            <input type="text" class="form-input" placeholder="No. 12, Jalan Ampang">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label class="form-label">Address Line 2 (Optional)</label>
+            <input type="text" class="form-input" placeholder="Block B, Taman Maju">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" class="form-input" placeholder="Kuala Lumpur">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Postcode</label>
+            <input type="text" class="form-input" placeholder="50450">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <select class="form-input">
+              <option>Select state...</option>
+              <option>Kuala Lumpur</option>
+              <option>Selangor</option>
+              <option>Penang</option>
+              <option>Johor</option>
+              <option>Perak</option>
+              <option>Sabah</option>
+              <option>Sarawak</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Payment Method</div>
+        <div class="payment-methods">
+          <label class="pay-option selected" onclick="selectPay(this)">
+            <input type="radio" name="pay" checked>
+            <span class="pay-label">Online Banking (FPX)</span>
+            <div class="pay-icons">
+              <span class="pay-icon-pill">Maybank</span>
+              <span class="pay-icon-pill">CIMB</span>
+              <span class="pay-icon-pill">HLB</span>
+            </div>
+          </label>
+          <label class="pay-option" onclick="selectPay(this)">
+            <input type="radio" name="pay">
+            <span class="pay-label">DuitNow QR</span>
+            <div class="pay-icons">
+              <span class="pay-icon-pill">DuitNow</span>
+            </div>
+          </label>
+          <label class="pay-option" onclick="selectPay(this)">
+            <input type="radio" name="pay">
+            <span class="pay-label">Credit / Debit Card</span>
+            <div class="pay-icons">
+              <span class="pay-icon-pill">Visa</span>
+              <span class="pay-icon-pill">Mastercard</span>
+            </div>
+          </label>
+          <label class="pay-option" onclick="selectPay(this)">
+            <input type="radio" name="pay">
+            <span class="pay-label">GrabPay / Touch 'n Go</span>
+            <div class="pay-icons">
+              <span class="pay-icon-pill">GrabPay</span>
+              <span class="pay-icon-pill">TnG</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <button class="btn-primary" style="width:100%;padding:16px;font-size:14px;" onclick="goTo('success')">
+        Complete Order →
+      </button>
+      <div style="font-size:12px;color:var(--grey);margin-top:14px;display:flex;align-items:center;gap:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Your payment is secured with 256-bit SSL encryption
+      </div>
+    </div>
+
+    <!-- Checkout Summary -->
+    <div class="checkout-summary">
+      <div class="summary-title">Your Order</div>
+      <div id="checkout-items"></div>
+      <div style="height:1px;background:var(--light-grey);margin:20px 0;"></div>
+      <div class="promo-row">
+        <input class="promo-input" placeholder="Promo code (e.g. HUBHUB10)">
+        <button class="btn-sm">Apply</button>
+      </div>
+      <div id="checkout-summary-totals"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SUCCESS PAGE ═══════════════ -->
+<div id="page-success" class="page">
+  <div class="success-page">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1 class="success-title">Order Confirmed!</h1>
+    <p class="success-sub">Terima kasih for your purchase! Your order has been placed and is being processed.</p>
+    <div class="success-order" id="success-order-num">Order #HH-2026-00847</div>
+
+    <div class="success-details">
+      <div class="success-detail-row">
+        <span class="lbl">Estimated Delivery</span>
+        <span class="val">3–5 Business Days</span>
+      </div>
+      <div class="success-detail-row">
+        <span class="lbl">Courier</span>
+        <span class="val">J&T Express / Pos Laju</span>
+      </div>
+      <div class="success-detail-row">
+        <span class="lbl">Confirmation</span>
+        <span class="val">Sent to your email</span>
+      </div>
+      <div class="success-detail-row" id="success-total-row">
+        <span class="lbl">Total Paid</span>
+        <span class="val">—</span>
+      </div>
+    </div>
+
+    <div class="success-actions">
+      <button class="btn-primary" onclick="goTo('home')">Continue Shopping</button>
+      <button class="btn-ghost" style="color:var(--black);border-color:var(--light-grey);">Track My Order</button>
+    </div>
+  </div>
+
+  <footer style="background:var(--black);color:var(--white);padding:28px 40px;">
+    <div class="footer-bottom" style="border:none;padding:0;">
+      <span onclick="goTo('home')" style="cursor:pointer;font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;letter-spacing:0.02em;">hubhub</span>
+      <span>© 2026 hubhub. Made in Malaysia 🇲🇾</span>
+    </div>
+  </footer>
+</div>
+
+<!-- WhatsApp Float -->
+<div class="wa-float" title="Chat with us on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <div class="toast-dot"></div>
+  <span id="toast-msg">Added to cart</span>
+</div>
+
+<script>
+// ─── DATA ───
+const products = [
+  { id:1, name:'CloudFlex Sports Bra', cat:'Women', type:'Sports Bra', price:139, oldPrice:null, badge:'New', color:'#c8bfb2' },
+  { id:2, name:'ZenFlow Leggings', cat:'Women', type:'Bottoms', price:169, oldPrice:229, badge:'Sale', color:'#b0a89a' },
+  { id:3, name:'PowerGrid Tee', cat:'Men', type:'Tops', price:99, oldPrice:null, badge:'New', color:'#9a9590' },
+  { id:4, name:'DualTone Set (Bra+Legging)', cat:'Women', type:'Sets', price:269, oldPrice:339, badge:'Sale', color:'#c4bbb0' },
+  { id:5, name:'CoreDrive Shorts', cat:'Men', type:'Bottoms', price:119, oldPrice:null, badge:null, color:'#8f8880' },
+  { id:6, name:'StrongBack Racerback', cat:'Women', type:'Tops', price:109, oldPrice:null, badge:'New', color:'#b8b0a5' },
+  { id:7, name:'ActivePro Jogger', cat:'Men', type:'Bottoms', price:189, oldPrice:239, badge:'Sale', color:'#888078' },
+  { id:8, name:'Unison Zip Hoodie', cat:'Unisex', type:'Tops', price:229, oldPrice:null, badge:null, color:'#a09890' },
+  { id:9, name:'FlowState Set (M)', cat:'Men', type:'Sets', price:279, oldPrice:349, badge:'Sale', color:'#908880' },
+  { id:10, name:'LiftEase Sports Bra', cat:'Women', type:'Sports Bra', price:129, oldPrice:null, badge:null, color:'#c0b8ae' },
+  { id:11, name:'StretchMax Tights', cat:'Women', type:'Bottoms', price:159, oldPrice:null, badge:'New', color:'#b8b0a4' },
+  { id:12, name:'BreezeTech Tank', cat:'Unisex', type:'Tops', price:89, oldPrice:129, badge:'Sale', color:'#a8a098' },
+];
+
+let cart = [];
+let currentFilter = null;
+
+// ─── ROUTING ───
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo(0, 0);
+  if(page === 'home') renderHomeProducts();
+  if(page === 'shop') renderShopProducts();
+  if(page === 'cart') renderCart();
+  if(page === 'checkout') renderCheckout();
+  if(page === 'success') renderSuccess();
+}
+
+function filterAndGo(filter) {
+  currentFilter = filter;
+  goTo('shop');
+  // tick checkboxes
+  document.querySelectorAll('[data-filter]').forEach(el => el.checked = false);
+  if(filter === 'Sale') {
+    const saleCb = document.querySelector('[data-filter="sale"]');
+    if(saleCb) saleCb.checked = true;
+  } else if(['Women','Men','Unisex'].includes(filter)) {
+    document.querySelectorAll('[data-filter="cat"]').forEach(el => { if(el.value===filter) el.checked=true; });
+  } else {
+    document.querySelectorAll('[data-filter="type"]').forEach(el => { if(el.value===filter) el.checked=true; });
+  }
+  renderShopProducts();
+  document.getElementById('shop-subtitle').textContent = `Showing: ${filter}`;
+}
+
+// ─── PRODUCT CARD ───
+function productCardHTML(p, size='normal') {
+  const h = size==='normal' ? '' : '';
+  return `
+    <div class="product-card" onclick="addToCart(${p.id})">
+      <div class="product-img" style="background:${p.color};">
+        <div class="img-placeholder light" style="background:${p.color};color:rgba(0,0,0,0.15);font-size:10px;">${p.name.toUpperCase()}</div>
+        ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-cat">${p.cat} · ${p.type}</div>
+        <div class="product-price-row">
+          <span class="product-price">RM${p.price}</span>
+          ${p.oldPrice ? `<span class="product-price-old">RM${p.oldPrice}</span>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
+// ─── HOME PRODUCTS ───
+function renderHomeProducts() {
+  const el = document.getElementById('home-products');
+  if(!el) return;
+  const newOnes = products.filter(p => p.badge==='New').slice(0,4);
+  el.innerHTML = newOnes.map(p => productCardHTML(p)).join('');
+}
+
+// ─── SHOP PRODUCTS ───
+function applyFilters() { renderShopProducts(); }
+
+function renderShopProducts() {
+  const catChecked = [...document.querySelectorAll('[data-filter="cat"]:checked')].map(e=>e.value);
+  const typeChecked = [...document.querySelectorAll('[data-filter="type"]:checked')].map(e=>e.value);
+  const priceChecked = [...document.querySelectorAll('[data-filter="price"]:checked')].map(e=>e.value);
+  const saleChecked = document.querySelector('[data-filter="sale"]:checked');
+
+  let filtered = products.filter(p => {
+    if(catChecked.length && !catChecked.includes(p.cat)) return false;
+    if(typeChecked.length && !typeChecked.includes(p.type)) return false;
+    if(priceChecked.length) {
+      const pass = priceChecked.some(r => {
+        if(r==='under100') return p.price<100;
+        if(r==='100-200') return p.price>=100 && p.price<=200;
+        if(r==='over200') return p.price>200;
+        return false;
+      });
+      if(!pass) return false;
+    }
+    if(saleChecked && !p.oldPrice) return false;
+    return true;
+  });
+
+  document.getElementById('shop-count').textContent = `${filtered.length} product${filtered.length!==1?'s':''}`;
+  document.getElementById('shop-products').innerHTML = filtered.length
+    ? filtered.map(p => productCardHTML(p)).join('')
+    : `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--grey);">No products match your filters.</div>`;
+
+  // Active filter tags
+  const tags = [...catChecked, ...typeChecked, ...(saleChecked?['On Sale']:[])];
+  document.getElementById('active-filters').innerHTML = tags.map(t =>
+    `<div class="filter-tag">${t} <button onclick="removeFilterTag('${t}')">×</button></div>`
+  ).join('');
+}
+
+function removeFilterTag(tag) {
+  document.querySelectorAll('[data-filter]').forEach(el => {
+    if(el.value===tag || (tag==='On Sale' && el.dataset.filter==='sale')) el.checked=false;
+  });
+  renderShopProducts();
+}
+
+// ─── CART ───
+function addToCart(id) {
+  const p = products.find(x=>x.id===id);
+  const existing = cart.find(x=>x.id===id);
+  if(existing) existing.qty++;
+  else cart.push({...p, qty:1, size:'M'});
+  updateCartBadge();
+  showToast(`${p.name} added to cart`);
+}
+
+function updateCartBadge() {
+  const total = cart.reduce((s,i)=>s+i.qty,0);
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = total;
+  badge.style.display = total>0 ? 'flex' : 'none';
+}
+
+function cartTotal() { return cart.reduce((s,i)=>s+(i.price*i.qty),0); }
+function shipping() { return cartTotal()>=150 ? 0 : 9; }
+
+function renderCart() {
+  const el = document.getElementById('cart-content');
+  if(cart.length===0) {
+    el.innerHTML = `
+      <div class="empty-state">
+        <h2>Your Cart is Empty</h2>
+        <p>Looks like you haven't added anything yet.</p>
+        <button class="btn-primary" onclick="goTo('shop')">Start Shopping</button>
+      </div>`;
+    return;
+  }
+  const sub = cartTotal();
+  const ship = shipping();
+  el.innerHTML = `
+    <div class="cart-layout">
+      <div>
+        <h1 class="page-heading">Your Cart (${cart.reduce((s,i)=>s+i.qty,0)} items)</h1>
+        <div>
+          ${cart.map(item => `
+            <div class="cart-item">
+              <div class="cart-item-img">
+                <div class="img-placeholder light" style="background:${item.color};color:rgba(0,0,0,0.15);font-size:9px;height:100%;">${item.name.toUpperCase()}</div>
+              </div>
+              <div class="cart-item-details">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-variant">Size: ${item.size} · ${item.cat}</div>
+                <div class="qty-control">
+                  <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+                  <div class="qty-num">${item.qty}</div>
+                  <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+                </div>
+              </div>
+              <div class="cart-item-right">
+                <div class="cart-item-price">RM${item.price*item.qty}</div>
+                <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="order-summary">
+        <div class="summary-title">Order Summary</div>
+        <div class="summary-row"><span class="label">Subtotal</span><span>RM${sub}</span></div>
+        <div class="summary-row"><span class="label">Shipping</span><span>${ship===0?'<span style="color:#4ade80;font-weight:600;">FREE</span>':'RM'+ship}</span></div>
+        ${ship>0?`<div style="font-size:12px;color:var(--grey);margin:-8px 0 12px;">Add RM${150-sub} more for free shipping</div>`:''}
+        <div class="summary-row total"><span class="label">Total</span><span>RM${sub+ship}</span></div>
+        <div class="promo-row">
+          <input class="promo-input" placeholder="Promo code">
+          <button class="btn-sm">Apply</button>
+        </div>
+        <button class="btn-primary" style="width:100%;padding:15px;font-size:14px;" onclick="goTo('checkout')">Proceed to Checkout →</button>
+        <div style="text-align:center;margin-top:14px;">
+          <span onclick="goTo('shop')" style="font-size:13px;color:var(--grey);cursor:pointer;text-decoration:underline;">← Continue Shopping</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(x=>x.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0) cart = cart.filter(x=>x.id!==id);
+  updateCartBadge();
+  renderCart();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(x=>x.id!==id);
+  updateCartBadge();
+  renderCart();
+}
+
+// ─── CHECKOUT ───
+function renderCheckout() {
+  const itemsEl = document.getElementById('checkout-items');
+  const totalsEl = document.getElementById('checkout-summary-totals');
+  const sub = cartTotal();
+  const ship = shipping();
+
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="checkout-item-row">
+      <div class="checkout-item-img">
+        <div class="img-placeholder light" style="background:${item.color};color:rgba(0,0,0,0.12);font-size:8px;height:100%;">${item.type}</div>
+        <div class="checkout-item-badge">${item.qty}</div>
+      </div>
+      <div class="checkout-item-info">
+        <div class="checkout-item-name">${item.name}</div>
+        <div class="checkout-item-var">Size ${item.size}</div>
+      </div>
+      <div class="checkout-item-price">RM${item.price*item.qty}</div>
+    </div>`).join('');
+
+  totalsEl.innerHTML = `
+    <div class="summary-row"><span class="label">Subtotal</span><span>RM${sub}</span></div>
+    <div class="summary-row"><span class="label">Shipping</span><span>${ship===0?'FREE':'RM'+ship}</span></div>
+    <div class="summary-row total"><span class="label">Total</span><span>RM${sub+ship}</span></div>`;
+}
+
+function selectPay(el) {
+  document.querySelectorAll('.pay-option').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked=true;
+}
+
+// ─── SUCCESS ───
+function renderSuccess() {
+  const orderNum = 'HH-2026-' + String(Math.floor(Math.random()*90000)+10000);
+  document.getElementById('success-order-num').textContent = `Order #${orderNum}`;
+  const total = cartTotal() + shipping();
+  document.getElementById('success-total-row').innerHTML = `<span class="lbl">Total Paid</span><span class="val">RM${total}</span>`;
+  cart = [];
+  updateCartBadge();
+}
+
+// ─── TOAST ───
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// Init
+renderHomeProducts();
+</script>
+</body>
+</html>
